@@ -1,0 +1,81 @@
+.pkm-container {
+  background-color: rgb(255, 250, 232);
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 0.1rem solid rgb(206, 206, 206);
+  border-radius: 1rem;
+}
+.pkm-img {
+  width: 10rem;
+}
+.pkm-name {
+  float: left;
+}
+.pkm-id {
+  float: right;
+}
+
+.type {
+  display: inline-block;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  margin-right: 0.1rem;
+  color: white;
+  font-size: 0.8rem;
+}
+.normal {
+  background-color: azure;
+}
+.fire {
+  background-color: rgb(228, 25, 25);
+}
+.water {
+  background-color: rgb(52, 106, 255);
+}
+.grass {
+  background-color: rgb(37, 199, 37);
+}
+.electric {
+  background-color: rgb(233, 255, 34);
+}
+.ice {
+  background-color: rgb(14, 255, 255);
+}
+.fighting {
+  background-color: rgb(143, 28, 37);
+}
+.poison {
+  background-color: rgb(143, 23, 137);
+}
+.ground {
+  background-color: rgb(199, 112, 61);
+}
+.flying {
+  background-color: rgb(231, 255, 255);
+}
+.psychic {
+  background-color: rgb(255, 62, 229);
+}
+.bug {
+  background-color: rgb(67, 255, 124);
+}
+.rock {
+  background-color: rgb(148, 98, 23);
+}
+.ghost {
+  background-color: rgb(99, 40, 96);
+}
+.dark {
+  background-color: rgb(71, 0, 33);
+}
+.dragon {
+  background-color: rgb(9, 0, 92);
+}
+.steel {
+  background-color: rgb(168, 168, 168);
+}
+.fairy {
+  background-color: rgb(231, 151, 227);
+}
