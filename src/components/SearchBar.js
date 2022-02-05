@@ -1,7 +1,11 @@
-import React from "react";
+import ColourPick from "./ColourPick";
 
-const SearchBar = () => {
-  return <div>SearchBar</div>;
+const SearchBar = ({ setTeam }) => {
+  return (
+    <div>
+      <ColourPick setTeam={setTeam} />
+    </div>
+  );
 };
 
 export default SearchBar;

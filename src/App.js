@@ -1,10 +1,21 @@
 import Team from "./components/Team";
+import SearchBar from "./components/SearchBar";
+import { useState } from "react";
+
 import "./styles/pokemon.css";
 
 function App() {
+  const [team, setTeam] = useState([1, 2, 3]);
+
   return (
     <div className="App">
-      <Team ids={[1, 2, 3, 4, 5]} />
+      <SearchBar
+        setTeam={(myTeam) => {
+          setTeam(myTeam);
+        }}
+      />
+
+      <Team ids={team} />
     </div>
   );
 }

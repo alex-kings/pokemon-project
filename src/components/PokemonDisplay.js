@@ -10,7 +10,9 @@ const PokemonDisplay = ({ pokemon }) => {
 
       <div>
         {pokemon.types.map((type) => (
-          <p className={"type " + type.type.name}>{type.type.name}</p>
+          <p key={type.slot} className={"type " + type.type.name}>
+            {type.type.name}
+          </p>
         ))}
       </div>
 
