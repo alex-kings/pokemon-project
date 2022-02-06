@@ -1,21 +1,21 @@
 import Team from "./components/Team";
 import SearchBar from "./components/SearchBar";
 import { useState } from "react";
-import Example from "./components/Example";
 
 import "./styles/pokemon.css";
 
 function App() {
-  const [team, setTeam] = useState([]);
+  const [team, setTeam] = useState([1, 2, 3]);
 
   return (
     <div className="App">
       <SearchBar
-        setTeam={(t) => {
-          setTeam(t);
+        setTeam={(myTeam) => {
+          setTeam(myTeam);
         }}
       />
-      <Team key={team} team={team} />
+
+      <Team ids={team} />
     </div>
   );
 }

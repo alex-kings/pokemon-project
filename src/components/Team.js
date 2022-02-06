@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Pokemon from "./Pokemon";
 
-const Team = ({ team }) => {
+const Team = ({ ids }) => {
   return (
     <div className="team-container">
-      {team.map((pokemon, index) => (
-        <Pokemon key={index} pokemon={pokemon} />
+      {ids.map((id) => (
+        <Pokemon key={id} id={id} />
       ))}
-      {console.log(team)}
     </div>
   );
 };

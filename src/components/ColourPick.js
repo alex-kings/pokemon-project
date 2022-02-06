@@ -1,39 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ColourPick = ({ setTeam }) => {
+  const [colour, setColour] = useState("");
+  const [picked, setPicked] = useState(false);
+
   const inputSelected = (event) => {
-    pokemonsFromColour(event.target.value);
+    setColour(event.target.value);
+    setPicked(false);
+  };
+
+  const buttonClicked = () => {
+    if (colour != "") {
+      setPicked(true);
+      pokemonsFromColour(colour);
+    }
   };
 
   // Find list of pokemons of a certain colour
-  async function pokemonsFromColour(myColour) {
-    let myPokemons = [];
+  function pokemonsFromColour(myColour) {
     fetch("https://pokeapi.co/api/v2/pokemon-color/" + myColour)
       .then((response) => response.json())
       .then((data) => {
         shuffle(data["pokemon_species"]);
         let pokemons = data["pokemon_species"].slice(0, 6);
-
-        pokemons.forEach((pokemon) => {
-          fetch(pokemon.url)
-            .then((response) => response.json())
-            .then((pkm) => {
-              myPokemons.push(pkm);
-            });
-        });
-      })
-      .then(() => {
-        setTeam(myPokemons);
+        for (let i = 0; i < pokemons.length; i++) {
+          pokemons[i] = getIdFromUrl(pokemons[i].url);
+        }
+        console.log(pokemons);
+        setTeam(pokemons);
       });
   }
-
-  /*async function getPokemon(id) {
-    fetch("https://pokeapi.co/api/v2/pokemon/" + id)
-      .then((response) => response.json())
-      .then((pokemon) => {
-        return pokemon;
-      });
-  }*/
 
   function getIdFromUrl(url) {
     let splitted = url.split("/");
@@ -96,6 +92,8 @@ const ColourPick = ({ setTeam }) => {
         <input type="radio" name="Colour" value="yellow" />
         <label>Yellow</label>
       </div>
+      <button onClick={buttonClicked}>Select</button>
+      {picked ? null : <p>Pick a colour!</p>}
     </div>
   );
 };
