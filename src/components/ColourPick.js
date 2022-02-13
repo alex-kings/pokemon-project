@@ -1,34 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 
 const ColourPick = ({ setTeam }) => {
-  const [colour, setColour] = useState("");
-  const [picked, setPicked] = useState(false);
-
   const inputSelected = (event) => {
-    setColour(event.target.value);
-    setPicked(false);
-  };
-
-  const buttonClicked = () => {
-    if (colour != "") {
-      setPicked(true);
-      pokemonsFromColour(colour);
-    }
+    pokemonsFromColour(event.target.value);
   };
 
   // Find list of pokemons of a certain colour
-  function pokemonsFromColour(myColour) {
-    fetch("https://pokeapi.co/api/v2/pokemon-color/" + myColour)
-      .then((response) => response.json())
-      .then((data) => {
-        shuffle(data["pokemon_species"]);
-        let pokemons = data["pokemon_species"].slice(0, 6);
-        for (let i = 0; i < pokemons.length; i++) {
-          pokemons[i] = getIdFromUrl(pokemons[i].url);
-        }
-        console.log(pokemons);
-        setTeam(pokemons);
-      });
+  async function pokemonsFromColour(myColour) {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon-color/" + myColour);
+    const pokemons = await response.json();
+    shuffle(pokemons["pokemon_species"]);
+    let mypkms = pokemons["pokemon_species"].slice(0, 6);
+    
+    const myarray = await Promise.all(mypkms.map(async (pkm)=>{
+
+      console.log("https://pokeapi.co/api/v2/pokemon/" + getIdFromUrl(pkm.url))
+      return await getPkm("https://pokeapi.co/api/v2/pokemon/" + getIdFromUrl(pkm.url))
+    }));
+    console.log(myarray);
+    setTeam(myarray);
+  }
+
+  async function getPkm(url){
+    const response = await fetch(url);
+    return await response.json()
   }
 
   function getIdFromUrl(url) {
@@ -40,7 +35,7 @@ const ColourPick = ({ setTeam }) => {
   function shuffle(array) {
     let currentIndex = array.length;
     let randomIndex;
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
@@ -92,8 +87,6 @@ const ColourPick = ({ setTeam }) => {
         <input type="radio" name="Colour" value="yellow" />
         <label>Yellow</label>
       </div>
-      <button onClick={buttonClicked}>Select</button>
-      {picked ? null : <p>Pick a colour!</p>}
     </div>
   );
 };

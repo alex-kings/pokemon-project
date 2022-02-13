@@ -5,17 +5,16 @@ import { useState } from "react";
 import "./styles/pokemon.css";
 
 function App() {
-  const [team, setTeam] = useState([1, 2, 3]);
+  const [team, setTeam] = useState([]);
 
   return (
     <div className="App">
       <SearchBar
-        setTeam={(myTeam) => {
-          setTeam(myTeam);
+        setTeam={(t) => {
+          setTeam(t);
         }}
       />
-
-      <Team ids={team} />
+      <Team team={team} />
     </div>
   );
 }

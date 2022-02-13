@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from "react";
-import PokemonDisplay from "./PokemonDisplay";
+import React from "react";
 
-const Pokemon = ({ id }) => {
-  // Need to initialize a dummy object to render before fetching data
-  const [pokemon, setPokemon] = useState(false);
+const Pokemon = ({ pokemon }) => {
+  console.log(pokemon)
+  return (
+    <div className="pkm-container">
+      <div>
+        <p className="pkm-name">{pokemon.name}</p>
+        <p className="pkm-id">id:{pokemon.id}</p>
+      </div>
 
-  // Fetch pokemon on load
-  useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        setPokemon(data);
-      });
-  }, []);
+      <div>
+        {pokemon.types.map((type) => (
+          <p key={type.slot} className={"type " + type.type.name}>
+            {type.type.name}
+          </p>
+        ))}
+      </div>
 
-  return <>{pokemon ? <PokemonDisplay pokemon={pokemon} /> : null}</>;
+      <div>
+        <img
+          src={pokemon.sprites.other["official-artwork"]["front_default"]}
+          alt="Italian Trulli"
+          className="pkm-img"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Pokemon;

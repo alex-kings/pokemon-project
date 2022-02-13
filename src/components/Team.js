@@ -1,11 +1,11 @@
 import React from "react";
 import Pokemon from "./Pokemon";
 
-const Team = ({ ids }) => {
+const Team = ({ team }) => {
   return (
     <div className="team-container">
-      {ids.map((id) => (
-        <Pokemon key={id} id={id} />
+      {team.map((pokemon) => (
+        <Pokemon key={pokemon.name} pokemon={pokemon} />
       ))}
     </div>
   );
